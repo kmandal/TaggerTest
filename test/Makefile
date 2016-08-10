@@ -27,7 +27,7 @@ LDFLAGS    =
 
 LIBS       = $(shell root-config --glibs)
 
-PROGRAMS = TopVar
+PROGRAMS = TopVar TopCatagory
 
 LIBRARIES = TopTagger
 
@@ -78,6 +78,8 @@ $(ODIR)/%.o : $(IDIR)/%.C
 TopVar: $(ODIR)/TopVar.o $(ODIR)/NTupleReader.o $(ODIR)/samples.o
 	$(LD) $^ $(LIBS) -L${CMSSW_BASE}/lib/${SCRAM_ARCH}/ -lrecipeAUXOxbridgeMT2 -lTopTaggerTopTagger -lTopTaggerCfgParser -o $@
 
+TopCatagory: $(ODIR)/TopCatagory.o $(ODIR)/NTupleReader.o $(ODIR)/samples.o
+	$(LD) $^ $(LIBS) -L${CMSSW_BASE}/lib/${SCRAM_ARCH}/ -lrecipeAUXOxbridgeMT2 -lTopTaggerTopTagger -lTopTaggerCfgParser -o $@
 
 #TopTagger : $(addprefix $(ODIR)/, $(notdir $(patsubst %.cc, %.o, $(patsubst %.cpp, %.o, $(wildcard $(TTSDIR)/*.cpp $(TTSDIR)/*.cc $(TPSDIR)/*.cpp $(TPSDIR)/*.cc)))))
 #	ar rcs lib$@.a $^
