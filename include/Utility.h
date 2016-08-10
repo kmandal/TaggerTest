@@ -23,6 +23,21 @@ namespace Utility {
     hist->Fill(copy, w);
   }
 
+  void Fill2D(TH2 *hist, const double &a, const double &b, const double &w){
+    int nbinx = hist->GetNbinsX();
+    int nbiny = hist->GetNbinsY();
+    double lowx = hist->GetXaxis()->GetBinLowEdge(nbinx);
+    double highx = hist->GetXaxis()->GetBinLowEdge(nbinx + 1);
+    double lowy = hist->GetYaxis()->GetBinLowEdge(nbiny);
+    double highy = hist->GetYaxis()->GetBinLowEdge(nbiny + 1);
+    double copyx = a;
+    if(copyx >= highx) copyx = lowx;
+    double copyy = b;
+    if(copyy >= highy) copyy = lowy;
+    hist->Fill(copyx, copyy, w);
+  }
+
+
   double calcMT(const TLorentzVector &objLVec, const TLorentzVector &metLVec){
     const double objMass = objLVec.M(), objPt = objLVec.Pt(), objPx = objLVec.Px(), objPy = objLVec.Py();
     const double met = metLVec.Pt(), metphi = metLVec.Phi();
